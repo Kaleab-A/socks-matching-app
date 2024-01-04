@@ -16,6 +16,7 @@ type AuthContextType = {
 	signup: (email: string, password: string) => Promise<UserCredential>;
 	login: (email: string, password: string) => Promise<UserCredential>;
 	logout: () => Promise<void>;
+	loading: boolean;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -27,6 +28,7 @@ type AuthProviderProps = {
 const AuthContextProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const [currentUser, setCurrentUser] = useState<User>();
 	const [isAdmin, setIsAdmin] = useState(false);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -35,6 +37,7 @@ const AuthContextProvider: React.FC<AuthProviderProps> = ({ children }) => {
 			} else {
 				setCurrentUser(undefined);
 			}
+			setLoading(false);
 		});
 		return unsubscribe;
 	}, []);
@@ -59,6 +62,7 @@ const AuthContextProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		signup,
 		login,
 		logout,
+		loading,
 	};
 
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

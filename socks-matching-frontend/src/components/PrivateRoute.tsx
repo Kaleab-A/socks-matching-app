@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Route, Navigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import Loading from "./Loading";
 
 type PrivateRouteProps = {
 	component: React.FC;
@@ -8,13 +9,16 @@ type PrivateRouteProps = {
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({
 	component: Component,
-	...rest
 }) => {
 	const context = useContext(AuthContext);
 
-	return (
-		<Route {...rest}>
-			{context?.currentUser ? <Component /> : <Navigate to="/login" />}
-		</Route>
+	return context?.loading ? (
+		<Loading />
+	) : context?.currentUser ? (
+		<Component />
+	) : (
+		<Navigate to="/login" />
 	);
 };
+
+export default PrivateRoute;
