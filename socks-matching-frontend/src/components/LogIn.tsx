@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useEffect, useState } from "react";
+import React, { useRef, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Navigate } from "react-router-dom";
 import {
@@ -12,34 +12,15 @@ import {
 } from "@mui/material";
 import Loading from "./Loading";
 
-const SignUp: React.FC = () => {
+const LogIn: React.FC = () => {
 	const email = useRef<HTMLInputElement>(null);
 	const password = useRef<HTMLInputElement>(null);
-	const confirmPassword = useRef<HTMLInputElement>(null);
 
 	const authContextData = useContext(AuthContext);
 
-	const handleSignUp = async () => {
-		if (
-			email.current !== null &&
-			password.current !== null &&
-			confirmPassword.current !== null
-		) {
-			if (password.current.value !== confirmPassword.current.value) {
-				alert("Passwords do not match");
-				return;
-			}
-
-			const res = await authContextData?.signup(
-				email.current.value,
-				password.current.value
-			);
-
-			if (res) {
-				alert("Sign up successful");
-			} else {
-				alert("Sign up failed");
-			}
+	const handleLogIn = async () => {
+		if (email.current && password.current) {
+			await authContextData?.login(email.current.value, password.current.value);
 		}
 	};
 
@@ -48,7 +29,7 @@ const SignUp: React.FC = () => {
 			{authContextData?.loading ? (
 				<Loading />
 			) : authContextData?.currentUser ? (
-				<Navigate to="/" />
+				<Navigate to="/home" />
 			) : (
 				<Box
 					sx={{
@@ -92,22 +73,12 @@ const SignUp: React.FC = () => {
 								/>
 							</FormControl>
 
-							<FormControl>
-								<TextField
-									inputRef={confirmPassword}
-									label="Confirm Password"
-									type="password"
-									id="confirm-password"
-									variant="outlined"
-								/>
-							</FormControl>
-
-							<Button variant="contained" onClick={handleSignUp}>
-								Sign Up
+							<Button variant="contained" onClick={handleLogIn}>
+								Log In
 							</Button>
 
 							<Typography variant="body1" component="div" gutterBottom>
-								Already have an account? <a href="/login">Log In</a>
+								Already have an account? <a href="/signup">Sign Up</a>
 							</Typography>
 						</Stack>
 					</Card>
@@ -117,4 +88,4 @@ const SignUp: React.FC = () => {
 	);
 };
 
-export default SignUp;
+export default LogIn;

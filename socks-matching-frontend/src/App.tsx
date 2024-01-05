@@ -12,9 +12,9 @@ const App: React.FC = () => {
 			<AuthContextProvider>
 				<Router>
 					<Routes>
-						<Route path="/" element={<PrivateRoute component={Home} />} />
+						<Route path="/home" element={<PrivateRoute component={Home} />} />
 						<Route path="/signup" element={<SignUp />} />
-						<Route path="/login" element={<LogIn />} />
+						<Route path="/" element={<LogIn />} />
 					</Routes>
 				</Router>
 			</AuthContextProvider>

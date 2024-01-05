@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Route, Navigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Navigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import Loading from "./Loading";
 
@@ -17,7 +17,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
 	) : context?.currentUser ? (
 		<Component />
 	) : (
-		<Navigate to="/login" />
+		<Navigate to="/" />
 	);
 };
 

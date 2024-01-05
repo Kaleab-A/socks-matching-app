@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useEffect, useState } from "react";
+import React, { useRef, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Navigate } from "react-router-dom";
 import {
@@ -48,7 +48,7 @@ const SignUp: React.FC = () => {
 			{authContextData?.loading ? (
 				<Loading />
 			) : authContextData?.currentUser ? (
-				<Navigate to="/" />
+				<Navigate to="/home" />
 			) : (
 				<Box
 					sx={{
@@ -107,7 +107,7 @@ const SignUp: React.FC = () => {
 							</Button>
 
 							<Typography variant="body1" component="div" gutterBottom>
-								Already have an account? <a href="/login">Log In</a>
+								Already have an account? <a href="/">Log In</a>
 							</Typography>
 						</Stack>
 					</Card>
