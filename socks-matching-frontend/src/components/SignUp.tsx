@@ -26,7 +26,7 @@ const SignUp: React.FC = () => {
 			confirmPassword.current !== null
 		) {
 			if (password.current.value !== confirmPassword.current.value) {
-				alert("Passwords do not match");
+				// TODO: Add error message
 				return;
 			}
 
@@ -36,9 +36,11 @@ const SignUp: React.FC = () => {
 			);
 
 			if (res) {
-				alert("Sign up successful");
+				// TODO: Add success message
+				// alert("Sign up successful");
 			} else {
-				alert("Sign up failed");
+				// TODO: Add error message
+				// alert("Sign up failed");
 			}
 		}
 	};

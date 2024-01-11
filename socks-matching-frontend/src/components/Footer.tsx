@@ -11,9 +11,7 @@ type FooterProps = {
 };
 
 const Footer: React.FC<FooterProps> = ({ value, setValue }) => {
-	const handleClick = (newVal: number) => {
-		console.log("newVal: ", newVal);
-	};
+	const handleClick = (newVal: number) => {};
 
 	return (
 		<Box width="100%" marginBottom={2}>

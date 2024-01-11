@@ -7,12 +7,7 @@ import Search from "./Search";
 import Recent from "./Recent";
 
 const Home: React.FC = () => {
-	const authContextData = useContext(AuthContext);
 	const [mainPageVal, setMainPageVal] = useState<number>(0);
-
-	const handleSignOut = async () => {
-		await authContextData?.logout();
-	};
 
 	return (
 		<Container
@@ -24,10 +19,6 @@ const Home: React.FC = () => {
 				{mainPageVal === 0 && <Profile />}
 				{mainPageVal === 1 && <Search />}
 				{mainPageVal === 2 && <Recent />}
-
-				<Button onClick={handleSignOut} variant="contained">
-					Sign Out
-				</Button>
 			</Box>
 			<Footer value={mainPageVal} setValue={setMainPageVal} />
 		</Container>
