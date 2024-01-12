@@ -85,6 +85,31 @@ function Search() {
 		}
 	};
 
+	const handlePredict = async () => {
+		if (selectedFile) {
+			const formData = new FormData();
+
+			formData.append("image", selectedFile);
+
+			console.log(formData);
+
+			const res = await fetch("http://localhost:5000/predict", {
+				method: "POST",
+				body: formData,
+				headers: {
+					Accept: "application/json",
+				},
+			});
+
+			if (!res.ok) {
+				throw new Error(`HTTP error! Status: ${res.status}`);
+			}
+
+			const data = await res.json();
+			console.log(data);
+		}
+	};
+
 	// const handleXChange = (event: any, newValue: number | number[]) => {
 	// 	setSelectedPoint({ x: newValue as number, y: selectedPoint.y });
 
@@ -130,7 +155,7 @@ function Search() {
 					onChange={handleYChange}
 				/> */}
 			</Box>
-			<Button variant="contained" color="primary">
+			<Button variant="contained" color="primary" onClick={handlePredict}>
 				Search
 			</Button>
 		</Container>
