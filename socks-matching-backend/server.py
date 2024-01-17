@@ -8,6 +8,10 @@ from firebase_admin import db
 from firebase_admin import storage
 import datetime
 
+from env import firebase_token
+
+print("aaaaaaaa", firebase_token)
+
 app = Flask(__name__)
 CORS(app)
 
@@ -49,8 +53,6 @@ def predict():
         }
     )
 
-    # TODO: Setup dataset of image (database)
-
     # TODO: Preprocess images functions
     # TODO: Try making prediction with 2 images
 
@@ -59,7 +61,8 @@ def predict():
 
 def downloadModel():
     res = requests.get(
-        "https://firebasestorage.googleapis.com/v0/b/socks-matching-dev.appspot.com/o/numLayers-2_numUnits-256_dropout-0.5_optimizer-adam_activation-relu_lr-0.0011704313741.h5?alt=media&token=97200f8b-d1a4-4e87-bfec-2bc024da8fa0"
+        "https://firebasestorage.googleapis.com/v0/b/socks-matching-dev.appspot.com/o/numLayers-2_numUnits-256_dropout-0.5_optimizer-adam_activation-relu_lr-0.0011704313741.h5?alt=media&token="
+        + firebase_token
     )
 
     with open("model.h5", "wb") as f:
